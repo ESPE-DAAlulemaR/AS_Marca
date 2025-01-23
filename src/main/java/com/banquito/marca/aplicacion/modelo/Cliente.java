@@ -15,4 +15,10 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private String identificacion;
+    private String nombre;
+    private String direccion;
+    private String telefono;
+    private String correo;
 }
