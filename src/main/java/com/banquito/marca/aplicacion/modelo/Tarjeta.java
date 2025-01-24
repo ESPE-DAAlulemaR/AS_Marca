@@ -19,7 +19,9 @@ public class Tarjeta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "cliente_id")
     private Integer clienteId;
+
     private String tipo;
     private String numero;
     private String cvv;

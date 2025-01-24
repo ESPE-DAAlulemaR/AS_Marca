@@ -16,16 +16,18 @@ public class ClienteService {
         this.repositorio = repositorio;
     }
 
-    public Cliente buscarPorId(Integer id)
-    {
+    public Cliente buscarPorId(Integer id) {
         return this.repositorio.findById(id)
                 .orElseThrow(() -> new EntidadNoEncontradaExcepcion("No existe ningún cliente con ID: " + id));
     }
 
-    public Cliente buscarPorIdentificacion(String identificacion)
-    {
+    public Cliente buscarPorIdentificacionOFallar(String identificacion) {
         return this.repositorio.findByIdentificacion(identificacion)
                 .orElseThrow(() -> new EntidadNoEncontradaExcepcion("No existe ningún cliente con número de identificación: " + identificacion));
+    }
+
+    public Cliente buscarPorIdentificacion(String identificacion) {
+        return this.repositorio.findByIdentificacion(identificacion).orElse(null);
     }
 
     public void registrarCliente(Cliente cliente) {

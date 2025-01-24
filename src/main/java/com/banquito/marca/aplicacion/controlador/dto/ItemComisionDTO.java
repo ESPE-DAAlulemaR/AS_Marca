@@ -11,5 +11,4 @@ public class ItemComisionDTO {
     private String referencia;
     private BigDecimal comision;
     private String numeroCuenta;
-    private String binBanco;
 }

@@ -14,10 +14,8 @@ public class TransaccionPeticionDTO {
     private String fechaCaducidad;
     private BigDecimal valor;
     private String descripcion;
-    private String canal;
     private String beneficiario;
     private String numeroCuenta;
-    private String binBanco;
     private Boolean esDiferido;
     private Integer cuotas;
     private DetalleJsonDTO detalle;
