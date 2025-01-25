@@ -9,6 +9,8 @@ import com.banquito.marca.aplicacion.modelo.Tarjeta;
 import com.banquito.marca.aplicacion.modelo.Transaccion;
 import com.banquito.marca.aplicacion.servicio.TarjetaService;
 import com.banquito.marca.aplicacion.servicio.TransaccionService;
+import com.banquito.marca.aplicacion.servicio.ValidadorTarjetasService;
+import com.banquito.marca.compartido.excepciones.OperacionInvalidaExcepcion;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,25 +31,31 @@ public class TransaccionController {
 
     private final TarjetaService tarjetaService;
 
+    private final ValidadorTarjetasService validadorTarjetasService;
+
     public TransaccionController(
             TransaccionService transaccionService,
             ITransaccionPeticionMapper transaccionPeticionMapper,
             ITransaccionRespuestaMapper transaccionRespuestaMapper,
-            TarjetaService tarjetaService
+            TarjetaService tarjetaService,
+            ValidadorTarjetasService validadorTarjetasService
     ) {
         this.transaccionService = transaccionService;
         this.transaccionPeticionMapper = transaccionPeticionMapper;
         this.transaccionRespuestaMapper = transaccionRespuestaMapper;
         this.tarjetaService = tarjetaService;
+        this.validadorTarjetasService = validadorTarjetasService;
     }
 
     @PostMapping
     public ResponseEntity<?> almacenar(@Valid @RequestBody TransaccionPeticionDTO transaccionPeticionDTO) {
+        if (this.validadorTarjetasService.esNumeroTarjetaValido(transaccionPeticionDTO.getNumeroTarjeta()))
+            throw new OperacionInvalidaExcepcion("La tarjeta no es válida");
+
         Transaccion transaccion = this.transaccionPeticionMapper.toPersistence(transaccionPeticionDTO);
         Tarjeta tarjeta = this.tarjetaService.buscarPorNuemro(transaccionPeticionDTO.getNumeroTarjeta());
 
         this.transaccionService.registrarTransaccion(transaccion, tarjeta, transaccionPeticionDTO.getCvv(), transaccionPeticionDTO.getFechaCaducidad());
-
         TransaccionRespuestaDTO respuestaDTO = this.transaccionRespuestaMapper.toDto(transaccion);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(respuestaDTO);

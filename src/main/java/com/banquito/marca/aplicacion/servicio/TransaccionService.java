@@ -23,7 +23,7 @@ public class TransaccionService {
     private static final String ESTADO_RECHAZADA = "REC";
     private static final String ESTADO_REVERSADA = "REV";
 
-    private static final BigDecimal PORCENTAJE_COMISION = BigDecimal.valueOf(0.01);
+    private static final BigDecimal PORCENTAJE_COMISION = BigDecimal.valueOf(0.001);
 
     public TransaccionService(
             ITransaccionRepository repositorio,

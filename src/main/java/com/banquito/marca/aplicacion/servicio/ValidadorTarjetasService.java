@@ -4,11 +4,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ValidadorTarjetasService {
-    public static Boolean esNumeroTarjetaValido(String numeroTarjeta) {
+    public Boolean esNumeroTarjetaValido(String numeroTarjeta) {
         int suma = 0;
         boolean alternar = false;
 
-        for (int i = numeroTarjeta.length() - 1; i >= 0; i--) {
+        for (int i = numeroTarjeta.length() - 1; i >= 1; i--) {
             int digito = Character.getNumericValue(numeroTarjeta.charAt(i));
 
             if (alternar) {
