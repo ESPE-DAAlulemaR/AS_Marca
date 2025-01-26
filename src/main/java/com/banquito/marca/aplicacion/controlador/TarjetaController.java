@@ -11,6 +11,12 @@ import com.banquito.marca.aplicacion.servicio.ClienteService;
 import com.banquito.marca.aplicacion.servicio.GeneradorTarjetaService;
 import com.banquito.marca.aplicacion.servicio.TarjetaService;
 import com.banquito.marca.compartido.utilidades.UtilidadHash;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +51,27 @@ public class TarjetaController {
 
         this.generadorTarjetaService = generadorTarjetaService;
     }
+    
+    @Operation(
+            summary = "Crear una nueva tarjeta",
+            description = "Crea una nueva tarjeta asociada a un cliente. Si el cliente no existe, se registra automáticamente.",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Datos necesarios para crear una tarjeta",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = TarjetaPeticionDTO.class)
+                    )
+            )
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Tarjeta creada exitosamente",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = TarjetaRespuestaDTO.class)
+                    )),
+            @ApiResponse(responseCode = "400", description = "Datos inválidos en la solicitud",
+                    content = @Content(mediaType = "application/json"))
+    })
 
     @PostMapping
     public ResponseEntity<?> crear(@Valid @RequestBody TarjetaPeticionDTO tarjetaPeticionDTO)
