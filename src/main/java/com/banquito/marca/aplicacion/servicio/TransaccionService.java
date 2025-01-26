@@ -5,12 +5,20 @@ import com.banquito.marca.aplicacion.modelo.Transaccion;
 import com.banquito.marca.aplicacion.repositorio.ITransaccionRepository;
 import com.banquito.marca.compartido.excepciones.OperacionInvalidaExcepcion;
 import com.banquito.marca.compartido.utilidades.UtilidadHash;
+
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Predicate;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TransaccionService {
@@ -56,4 +64,45 @@ public class TransaccionService {
     private BigDecimal calcularComision(BigDecimal valor) {
         return valor.multiply(PORCENTAJE_COMISION);
     }
+
+   public Page<Transaccion> listarTransacciones(
+            String estado,
+            LocalDateTime fechaDesde,
+            LocalDateTime fechaHasta,
+            String numeroTarjeta,
+            Pageable pageable
+    ) {
+        return repositorio.findAll((root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Filtro por estado
+            if (estado != null && !estado.isEmpty()) {
+                predicates.add(cb.equal(root.get("estado"), estado));
+            }
+
+            // Filtro por fecha desde
+            if (fechaDesde != null) {
+                predicates.add(cb.greaterThanOrEqualTo(
+                    root.get("fechaHora"), fechaDesde));
+            }
+
+            // Filtro por fecha hasta
+            if (fechaHasta != null) {
+                predicates.add(cb.lessThanOrEqualTo(
+                    root.get("fechaHora"), fechaHasta));
+            }
+
+            // Filtro por número de tarjeta
+            if (numeroTarjeta != null && !numeroTarjeta.isEmpty()) {
+                Join<Transaccion, Tarjeta> tarjetaJoin = root.join("tarjeta");
+                predicates.add(cb.equal(tarjetaJoin.get("numero"), numeroTarjeta));
+            }
+
+            return predicates.isEmpty() 
+                ? cb.conjunction() 
+                : cb.and(predicates.toArray(new Predicate[0]));
+        }, pageable);
+    }
+
+
 }
