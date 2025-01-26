@@ -8,7 +8,6 @@ import com.banquito.marca.compartido.excepciones.OperacionInvalidaExcepcion;
 import com.banquito.marca.compartido.utilidades.UtilidadHash;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
