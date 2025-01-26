@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,9 +34,7 @@ public class TransaccionController {
     private final TransaccionService transaccionService;
     private final ITransaccionPeticionMapper transaccionPeticionMapper;
     private final ITransaccionRespuestaMapper transaccionRespuestaMapper;
-
     private final TarjetaService tarjetaService;
-
     private final ValidadorTarjetasService validadorTarjetasService;
 
     public TransaccionController(
@@ -52,6 +50,27 @@ public class TransaccionController {
         this.tarjetaService = tarjetaService;
         this.validadorTarjetasService = validadorTarjetasService;
     }
+
+    @Operation(
+            summary = "Registrar una transacción",
+            description = "Registra una nueva transacción validando el número de tarjeta y su información asociada.",
+            requestBody = @RequestBody(
+                    description = "Información necesaria para registrar una transacción",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = TransaccionPeticionDTO.class)
+                    )
+            )
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Transacción registrada exitosamente",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = TransaccionRespuestaDTO.class)
+                    )),
+            @ApiResponse(responseCode = "400", description = "Datos inválidos o tarjeta no válida",
+                    content = @Content(mediaType = "application/json"))
+    })
 
     @PostMapping
     public ResponseEntity<?> almacenar(@Valid @RequestBody TransaccionPeticionDTO transaccionPeticionDTO) {
