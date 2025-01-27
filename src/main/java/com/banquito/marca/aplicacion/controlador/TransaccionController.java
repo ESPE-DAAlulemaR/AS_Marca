@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("v1/transacciones")
+@Tag(name = "Transacciones", description = "Documentacion Transacciones")
 public class TransaccionController {
     private final TransaccionService transaccionService;
     private final ITransaccionPeticionMapper transaccionPeticionMapper;

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@Schema(name = "Respuesta Transacciones")
 public class TransaccionRespuestaDTO {
 
     @Schema(description = "Estado de la transacción (por ejemplo, 'Exitosa', 'Fallida')",

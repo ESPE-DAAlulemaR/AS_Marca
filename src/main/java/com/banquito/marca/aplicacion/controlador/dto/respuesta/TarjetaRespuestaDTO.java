@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@Schema(name = "Respuesta Tarjeta")
 public class TarjetaRespuestaDTO {
 
     @Schema(description = "Número de la tarjeta",

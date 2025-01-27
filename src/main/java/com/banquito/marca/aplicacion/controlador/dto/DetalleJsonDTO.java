@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@Schema(name = "Detalle Comisiones", description = "Representa un detalle de las comisiones")
 public class DetalleJsonDTO {
 
     @Schema(description = "Comisión de Gateway (Gtw)", example = "Comisión asociada al Gateway")

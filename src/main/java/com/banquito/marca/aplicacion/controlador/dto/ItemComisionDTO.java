@@ -8,9 +8,10 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+@Schema(name = "Comisiones", description = "Comisiones")
 public class ItemComisionDTO {
 
-    @Schema(description = "Referencia asociada a la comisión", example = "REF12345")
+    @Schema(description = "Referencia asociada a la comisión")
     private String referencia;
 
     @Schema(description = "Valor de la comisión", example = "150.75", type = "number", format = "decimal")

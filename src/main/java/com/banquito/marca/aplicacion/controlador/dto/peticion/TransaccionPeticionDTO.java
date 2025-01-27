@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+@Schema(name = "Peticiones Transacciones")
 public class TransaccionPeticionDTO {
 
     @Schema(description = "Número de tarjeta de crédito o débito", example = "1234567890123456")

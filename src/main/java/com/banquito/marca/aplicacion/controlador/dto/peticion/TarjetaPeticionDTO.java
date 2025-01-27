@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@Schema(name = "Peticiones Tarjeta")
 public class TarjetaPeticionDTO {
 
     @NotNull
