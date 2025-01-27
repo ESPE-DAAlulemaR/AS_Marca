@@ -14,16 +14,16 @@ public class TarjetaPeticionDTO {
     @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
     private String nombre;
     @NotBlank(message = "La dirección no debe ser vacía ni nula")
-    @Size(min = 0, max = 50, message = "La dirección debe tener un máximo de 50 caracteres")
+    @Size(min = 5, max = 50, message = "La dirección debe tener un máximo de 50 caracteres")
     private String direccion;
     @NotBlank(message = "El teléfono no debe ser vacío ni nulo")
     @Size(min = 3, max = 50, message = "El teléfono debe tener entre 3 y 50 caracteres")
     private String telefono;
-    @NotEmpty(message = "El correo no debe ser vacío ni nulo")
+    @NotBlank(message = "El correo no debe ser vacío ni nulo")
     @Email(message = "El correo debe tener un formato válido (ejemplo@dominio.com)")
     private String correo;
     @NotBlank(message = "El tipo de tarjeta no debe ser vacío ni nulo")
-    @Size(min = 0, max = 3, message = "El tipo debe tener un máximo de 3 caracteres")
+    @Size(max = 3, message = "El tipo debe tener un máximo de 3 caracteres")
     private String tipo;
     @NotBlank(message = "La franquicia no debe ser vacía ni nula")
     @Size(min = 4, max = 10, message = "La franquicia debe tener entre 4 y 10 caracteres")
