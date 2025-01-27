@@ -10,12 +10,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ItemComisionDTO {
     @NotBlank(message = "La referencia no debe ser vacía ni nula")
-    @Size(min = 1, max = 100, message = "La referencia debe tener un máximo de 100 caracteres")
+    @Size(min = 1, max = 50, message = "La referencia debe tener un máximo de 100 caracteres")
     private String referencia;
     @NotNull(message = "La comisión no debe ser nula")
-    @PositiveOrZero(message = "La comisión debe ser un valor positivo o cero")
+    @Positive(message = "La comisión debe ser un valor positivo")
     private BigDecimal comision;
     @NotBlank(message = "El número de cuenta no debe ser vacío ni nulo")
-    @Size(min = 1, max = 50, message = "El número de cuenta debe tener un máximo de 50 caracteres")
+    @Size(min = 1, max = 8, message = "El número de cuenta debe tener un máximo de 50 caracteres")
     private String numeroCuenta;
 }
