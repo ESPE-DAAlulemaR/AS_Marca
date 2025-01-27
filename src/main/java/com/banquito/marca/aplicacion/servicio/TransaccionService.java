@@ -35,8 +35,7 @@ public class TransaccionService {
 
     public TransaccionService(
             ITransaccionRepository repositorio,
-            ValidadorTarjetasService validadorTarjetasService
-    ) {
+            ValidadorTarjetasService validadorTarjetasService) {
         this.repositorio = repositorio;
         this.validadorTarjetasService = validadorTarjetasService;
     }
@@ -46,7 +45,8 @@ public class TransaccionService {
             throw new OperacionInvalidaExcepcion("Código de seguridad de la tarjeta incorrecto");
 
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/yy");
-        YearMonth fechaEntrada = YearMonth.parse(fechaCaducidad, inputFormatter);;
+        YearMonth fechaEntrada = YearMonth.parse(fechaCaducidad, inputFormatter);
+        ;
         YearMonth fechaBaseDatos = YearMonth.from(tarjeta.getFechaCaducidad());
 
         if (!fechaEntrada.equals(fechaBaseDatos))
@@ -65,13 +65,12 @@ public class TransaccionService {
         return valor.multiply(PORCENTAJE_COMISION);
     }
 
-   public Page<Transaccion> listarTransacciones(
+    public Page<Transaccion> listarTransacciones(
             String estado,
             LocalDateTime fechaDesde,
             LocalDateTime fechaHasta,
             String numeroTarjeta,
-            Pageable pageable
-    ) {
+            Pageable pageable) {
         return repositorio.findAll((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -83,13 +82,13 @@ public class TransaccionService {
             // Filtro por fecha desde
             if (fechaDesde != null) {
                 predicates.add(cb.greaterThanOrEqualTo(
-                    root.get("fechaHora"), fechaDesde));
+                        root.get("fechaHora"), fechaDesde));
             }
 
             // Filtro por fecha hasta
             if (fechaHasta != null) {
                 predicates.add(cb.lessThanOrEqualTo(
-                    root.get("fechaHora"), fechaHasta));
+                        root.get("fechaHora"), fechaHasta));
             }
 
             // Filtro por número de tarjeta
@@ -98,11 +97,13 @@ public class TransaccionService {
                 predicates.add(cb.equal(tarjetaJoin.get("numero"), numeroTarjeta));
             }
 
-            return predicates.isEmpty() 
-                ? cb.conjunction() 
-                : cb.and(predicates.toArray(new Predicate[0]));
+            // Agregar ordenamiento por fechaHora descendente
+            query.orderBy(cb.desc(root.get("fechaHora")));
+
+            return predicates.isEmpty()
+                    ? cb.conjunction()
+                    : cb.and(predicates.toArray(new Predicate[0]));
         }, pageable);
     }
-
 
 }

@@ -1,14 +1,17 @@
 import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:8080/v1'; 
+import { API_USERNAME, API_PASSWORD, API_BASE_URL } from '../config.js'; 
 
 const api = axios.create({
     baseURL: API_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
+    auth: {
+        username: API_USERNAME,
+        password: API_PASSWORD,
+    },
 });
-
+/*
 api.interceptors.request.use(
     config => {
         const token = localStorage.getItem('token');
@@ -19,7 +22,7 @@ api.interceptors.request.use(
     },
     error => Promise.reject(error)
 );
-
+*/
 // Agregamos mejor manejo de errores y logging
 export const getTransacciones = async (params) => {
     try {
@@ -28,7 +31,7 @@ export const getTransacciones = async (params) => {
         console.log('Respuesta recibida:', response.data);
         return response;
     } catch (error) {
-        console.error('Error al obtener transacciones:', error);
+        console.log('Error al obtener transacciones:', error);
         throw error;
     }
 };
