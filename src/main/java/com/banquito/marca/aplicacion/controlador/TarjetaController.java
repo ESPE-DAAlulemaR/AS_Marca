@@ -70,7 +70,10 @@ public class TarjetaController {
                             schema = @Schema(implementation = TarjetaRespuestaDTO.class)
                     )),
             @ApiResponse(responseCode = "400", description = "Datos inválidos en la solicitud",
-                    content = @Content(mediaType = "application/json"))
+                    content = @Content(mediaType = "application/json")),
+            
+            @ApiResponse(responseCode = "404", description = "Recurso no encontrado", 
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TarjetaRespuestaDTO.class)))
     })
 
     @PostMapping
