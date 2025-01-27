@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Schema(name = "Peticiones Tarjeta")
+@Schema(name = "Peticion Tarjeta")
 public class TarjetaPeticionDTO {
     @NotBlank(message = "El número de identificación no debe ser vacío ni nulo")
     @Size(max = 13, message = "El número de identificación debe tener entre 10 y 13 caracteres")

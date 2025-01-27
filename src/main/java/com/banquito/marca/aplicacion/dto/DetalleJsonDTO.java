@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Schema(name = "Detalles Comisiones", description = "Representa detalle de las comisiones")
+@Schema(name = "Detalle Comisiones", description = "Representa detalle de las comisiones")
 public class DetalleJsonDTO {
     @NotEmpty(message = "El objeto 'gtw' no debe ser vacío ni nulo")
     @Schema(description = "Comisión de Gateway (Gtw)", example = "Comisión asociada al Gateway")
