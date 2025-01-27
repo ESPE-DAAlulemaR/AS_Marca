@@ -10,7 +10,6 @@ import com.banquito.marca.aplicacion.modelo.Tarjeta;
 import com.banquito.marca.aplicacion.servicio.ClienteService;
 import com.banquito.marca.aplicacion.servicio.GeneradorTarjetaService;
 import com.banquito.marca.aplicacion.servicio.TarjetaService;
-import com.banquito.marca.compartido.utilidades.UtilidadHash;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("v1/tarjetas")
