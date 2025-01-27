@@ -19,21 +19,20 @@ public class TransaccionPeticionDTO {
     @NotEmpty
     private String fechaCaducidad;
     @NotEmpty
+    @Positive
     private BigDecimal valor;
     @NotBlank
-    @Size(min = 0, max = 100)
+    @Size(min = 0, max = 100, message = "La descripcion debe de tener un maximo de 100 caracteres")
     private String descripcion;
     @NotBlank
-    @Size(min = 0, max = 100)
+    @Size(min = 0, max = 100, message = "El beneficiario debe terne un maximo de 100 caracteres")
     private String beneficiario;
     @NotBlank
     private String numeroCuenta;
     @NotEmpty
     private Boolean esDiferido;
     @NotEmpty
-    @Positive
     private Integer cuotas;
     @NotEmpty
-    @Size(min = 0, max = 100)
     private DetalleJsonDTO detalle;
 }
