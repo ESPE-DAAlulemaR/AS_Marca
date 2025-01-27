@@ -10,6 +10,7 @@ import com.banquito.marca.aplicacion.modelo.Tarjeta;
 import com.banquito.marca.aplicacion.servicio.ClienteService;
 import com.banquito.marca.aplicacion.servicio.GeneradorTarjetaService;
 import com.banquito.marca.aplicacion.servicio.TarjetaService;
+import com.banquito.marca.compartido.excepciones.EntidadNoEncontradaExcepcion;
 import com.banquito.marca.compartido.utilidades.UtilidadHash;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,10 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -51,7 +49,29 @@ public class TarjetaController {
 
         this.generadorTarjetaService = generadorTarjetaService;
     }
-    
+
+    @Operation(
+            summary = "Buscar tarjeta por número",
+            description = "Devuelve una tarjeta específica buscando por su número."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tarjeta encontrada exitosamente",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Tarjeta no encontrada", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Número de tarjeta inválido", content = @Content)
+    })
+    @GetMapping("/{numero}")
+    public ResponseEntity<Tarjeta> obtenerTarjetaPorNumero(
+            @Parameter(description = "Número de la tarjeta a buscar", required = true, example = "1234567890123456")
+            @PathVariable String numero) {
+        try {
+            Tarjeta tarjeta = tarjetaService.buscarPorNuemro(numero);
+            return ResponseEntity.ok(tarjeta);
+        } catch (EntidadNoEncontradaExcepcion e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
     @Operation(
             summary = "Crear una nueva tarjeta",
             description = "Crea una nueva tarjeta asociada a un cliente. Si el cliente no existe, se registra automáticamente.",
