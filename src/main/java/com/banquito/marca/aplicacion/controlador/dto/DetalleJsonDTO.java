@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DetalleJsonDTO {
-    @NotEmpty
+    @NotEmpty(message = "El objeto 'gtw' no debe ser vacío ni nulo")
     private ItemComisionDTO gtw;
-    @NotEmpty
+    @NotEmpty(message = "El objeto 'processor' no debe ser vacío ni nulo")
     private ItemComisionDTO processor;
-    @NotEmpty
+    @NotEmpty(message = "El objeto 'marca' no debe ser vacío ni nulo")
     private ItemComisionDTO marca;
 }
