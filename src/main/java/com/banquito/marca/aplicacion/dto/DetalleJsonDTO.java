@@ -1,5 +1,6 @@
 package com.banquito.marca.aplicacion.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
