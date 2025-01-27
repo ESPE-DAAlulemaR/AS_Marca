@@ -11,10 +11,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class TransaccionPeticionDTO {
     @NotBlank(message = "El número de tarjeta no debe ser vacío ni nulo")
-    @Size(min = 0, max = 16, message = "El número de tarjeta debe tener un máximo de 16 caracteres")
+    @Size(max = 16, message = "El número de tarjeta debe tener un máximo de 16 caracteres")
     private String numeroTarjeta;
     @NotBlank(message = "El CVV no debe ser vacío ni nulo")
-    @Size(min = 0, max = 3, message = "El CVV debe tener un máximo de 3 caracteres")
+    @Size(max = 3, message = "El CVV debe tener un máximo de 3 caracteres")
     private String cvv;
     @NotEmpty(message = "La fecha de caducidad no debe ser vacía ni nula")
     private String fechaCaducidad;
@@ -22,16 +22,17 @@ public class TransaccionPeticionDTO {
     @Positive(message = "El valor debe ser positivo")
     private BigDecimal valor;
     @NotBlank(message = "La descripción no debe ser vacía ni nula")
-    @Size(min = 0, max = 100, message = "La descripción debe tener un máximo de 100 caracteres")
+    @Size(min = 10, max = 100, message = "La descripción debe tener un máximo de 100 caracteres")
     private String descripcion;
     @NotBlank(message = "El beneficiario no debe ser vacío ni nulo")
-    @Size(min = 0, max = 100, message = "El beneficiario debe tener un máximo de 100 caracteres")
+    @Size(min = 5, max = 100, message = "El beneficiario debe tener un máximo de 100 caracteres")
     private String beneficiario;
     @NotBlank(message = "El número de cuenta no debe ser vacío ni nulo")
     private String numeroCuenta;
     @NotEmpty(message = "El campo esDiferido no debe ser vacío ni nulo")
     private Boolean esDiferido;
     @NotEmpty(message = "El número de cuotas no debe ser vacío ni nulo")
+    @Positive(message = "El valor debe ser positivo")
     private Integer cuotas;
     @NotEmpty(message = "El detalle no debe ser vacío ni nulo")
     private DetalleJsonDTO detalle;
