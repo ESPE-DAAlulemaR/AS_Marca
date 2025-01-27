@@ -10,29 +10,29 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 public class TransaccionPeticionDTO {
-    @NotBlank
-    @Size(min =0, max=16, message = "Numero de la tarjeta difiere del tamaño permitido")
+    @NotBlank(message = "El número de tarjeta no debe ser vacío ni nulo")
+    @Size(min = 0, max = 16, message = "El número de tarjeta debe tener un máximo de 16 caracteres")
     private String numeroTarjeta;
-    @NotBlank
-    @Size(min = 0, max = 3, message = "El CVV tiene que ser de un maximo de 3 caracteres")
+    @NotBlank(message = "El CVV no debe ser vacío ni nulo")
+    @Size(min = 0, max = 3, message = "El CVV debe tener un máximo de 3 caracteres")
     private String cvv;
-    @NotEmpty
+    @NotEmpty(message = "La fecha de caducidad no debe ser vacía ni nula")
     private String fechaCaducidad;
-    @NotEmpty
-    @Positive
+    @NotEmpty(message = "El valor no debe ser vacío ni nulo")
+    @Positive(message = "El valor debe ser positivo")
     private BigDecimal valor;
-    @NotBlank
-    @Size(min = 0, max = 100, message = "La descripcion debe de tener un maximo de 100 caracteres")
+    @NotBlank(message = "La descripción no debe ser vacía ni nula")
+    @Size(min = 0, max = 100, message = "La descripción debe tener un máximo de 100 caracteres")
     private String descripcion;
-    @NotBlank
-    @Size(min = 0, max = 100, message = "El beneficiario debe terne un maximo de 100 caracteres")
+    @NotBlank(message = "El beneficiario no debe ser vacío ni nulo")
+    @Size(min = 0, max = 100, message = "El beneficiario debe tener un máximo de 100 caracteres")
     private String beneficiario;
-    @NotBlank
+    @NotBlank(message = "El número de cuenta no debe ser vacío ni nulo")
     private String numeroCuenta;
-    @NotEmpty
+    @NotEmpty(message = "El campo esDiferido no debe ser vacío ni nulo")
     private Boolean esDiferido;
-    @NotEmpty
+    @NotEmpty(message = "El número de cuotas no debe ser vacío ni nulo")
     private Integer cuotas;
-    @NotEmpty
+    @NotEmpty(message = "El detalle no debe ser vacío ni nulo")
     private DetalleJsonDTO detalle;
 }
