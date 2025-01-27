@@ -17,6 +17,7 @@ public class TransaccionPeticionDTO {
     @Size(max = 3, message = "El CVV debe tener un máximo de 3 caracteres")
     private String cvv;
     @NotEmpty(message = "La fecha de caducidad no debe ser vacía ni nula")
+    @Size(max = 5, message = "La fecha de caducidad debe tener un maximo de 5 caracteres")
     private String fechaCaducidad;
     @NotEmpty(message = "El valor no debe ser vacío ni nulo")
     @Positive(message = "El valor debe ser positivo")
@@ -28,6 +29,7 @@ public class TransaccionPeticionDTO {
     @Size(min = 5, max = 100, message = "El beneficiario debe tener un máximo de 100 caracteres")
     private String beneficiario;
     @NotBlank(message = "El número de cuenta no debe ser vacío ni nulo")
+    @Size(min = 8, max = 15, message = "El número de cuenta no debe tener entre 8 y 15 caracteres")
     private String numeroCuenta;
     @NotEmpty(message = "El campo esDiferido no debe ser vacío ni nulo")
     private Boolean esDiferido;
