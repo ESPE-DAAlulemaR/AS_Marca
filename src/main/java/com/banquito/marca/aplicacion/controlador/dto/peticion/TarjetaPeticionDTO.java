@@ -26,6 +26,6 @@ public class TarjetaPeticionDTO {
     @Size(min = 0, max = 3)
     private String tipo;
     @NotBlank
-    @Size(min = 3, max = 100)
+    @Size(min = 4, max = 10)
     private String franquicia;
 }
