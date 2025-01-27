@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("v1/transacciones")
+@RequestMapping("/v1/transacciones")
 public class TransaccionController {
     private final TransaccionService transaccionService;
     private final ITransaccionPeticionMapper transaccionPeticionMapper;
