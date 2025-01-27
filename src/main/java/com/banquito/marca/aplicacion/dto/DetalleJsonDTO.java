@@ -1,4 +1,4 @@
-package com.banquito.marca.aplicacion.controlador.dto;
+package com.banquito.marca.aplicacion.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
@@ -11,6 +11,6 @@ public class DetalleJsonDTO {
     private ItemComisionDTO gtw;
     @NotEmpty(message = "El objeto 'processor' no debe ser vacío ni nulo")
     private ItemComisionDTO processor;
-    @NotEmpty(message = "El objeto 'marca' no debe ser vacío ni nulo")
+
     private ItemComisionDTO marca;
 }

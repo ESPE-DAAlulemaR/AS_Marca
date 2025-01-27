@@ -1,7 +1,7 @@
 package com.banquito.marca.aplicacion.controlador;
 
-import com.banquito.marca.aplicacion.controlador.dto.peticion.TransaccionPeticionDTO;
-import com.banquito.marca.aplicacion.controlador.dto.respuesta.TransaccionRespuestaDTO;
+import com.banquito.marca.aplicacion.dto.peticion.TransaccionPeticionDTO;
+import com.banquito.marca.aplicacion.dto.respuesta.TransaccionRespuestaDTO;
 import com.banquito.marca.aplicacion.controlador.mapper.ITransaccionPeticionMapper;
 import com.banquito.marca.aplicacion.controlador.mapper.ITransaccionRespuestaMapper;
 import com.banquito.marca.aplicacion.modelo.Tarjeta;
@@ -71,6 +71,7 @@ public class TransaccionController {
 
         this.transaccionService.registrarTransaccion(transaccion, tarjeta, transaccionPeticionDTO.getCvv(),
                 transaccionPeticionDTO.getFechaCaducidad());
+        this.transaccionService.enviarTransaccionBanco(transaccion, transaccionPeticionDTO);
         TransaccionRespuestaDTO respuestaDTO = this.transaccionRespuestaMapper.toDto(transaccion);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(respuestaDTO);

@@ -1,8 +1,8 @@
 package com.banquito.marca.aplicacion.controlador;
 
-import com.banquito.marca.aplicacion.controlador.dto.peticion.TarjetaPeticionDTO;
-import com.banquito.marca.aplicacion.controlador.dto.peticion.TarjetaValidacionDTO;
-import com.banquito.marca.aplicacion.controlador.dto.respuesta.TarjetaRespuestaDTO;
+import com.banquito.marca.aplicacion.dto.peticion.TarjetaPeticionDTO;
+import com.banquito.marca.aplicacion.dto.peticion.TarjetaValidacionDTO;
+import com.banquito.marca.aplicacion.dto.respuesta.TarjetaRespuestaDTO;
 import com.banquito.marca.aplicacion.controlador.mapper.IClienteMapper;
 import com.banquito.marca.aplicacion.controlador.mapper.ITarjetaPeticionMapper;
 import com.banquito.marca.aplicacion.controlador.mapper.ITarjetaRespuestaMapper;
@@ -14,7 +14,6 @@ import com.banquito.marca.aplicacion.servicio.GeneradorTarjetaService;
 import com.banquito.marca.aplicacion.servicio.TarjetaService;
 import com.banquito.marca.aplicacion.servicio.ValidadorTarjetasService;
 import com.banquito.marca.compartido.excepciones.OperacionInvalidaExcepcion;
-import com.banquito.marca.compartido.utilidades.UtilidadHash;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

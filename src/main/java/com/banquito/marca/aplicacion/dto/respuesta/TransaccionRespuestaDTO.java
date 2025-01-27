@@ -1,4 +1,4 @@
-package com.banquito.marca.aplicacion.controlador.dto.respuesta;
+package com.banquito.marca.aplicacion.dto.respuesta;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

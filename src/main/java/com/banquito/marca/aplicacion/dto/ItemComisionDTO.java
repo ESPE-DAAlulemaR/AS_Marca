@@ -1,4 +1,4 @@
-package com.banquito.marca.aplicacion.controlador.dto;
+package com.banquito.marca.aplicacion.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
