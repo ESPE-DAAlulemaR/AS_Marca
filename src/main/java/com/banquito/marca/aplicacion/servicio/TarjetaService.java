@@ -37,7 +37,7 @@ public class TarjetaService {
 
     public Tarjeta buscarPorNuemro(String numero) {
         return this.repositorio.findByNumero(numero)
-                .orElseThrow(() -> new EntidadNoEncontradaExcepcion("No una tarjeta con número: " + numero));
+                .orElseThrow(() -> new EntidadNoEncontradaExcepcion("No se encontro una tarjeta con número: " + numero));
     }
 
     public void crearTarjeta(Tarjeta tarjeta, Cliente cliente, String franquicia) {

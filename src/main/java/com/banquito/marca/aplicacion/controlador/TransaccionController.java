@@ -12,7 +12,6 @@ import com.banquito.marca.aplicacion.servicio.ValidadorTarjetasService;
 import com.banquito.marca.compartido.excepciones.OperacionInvalidaExcepcion;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
@@ -33,12 +33,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Sort;
 import java.util.UUID;
@@ -47,6 +44,7 @@ import java.util.UUID;
 @RequestMapping("/v1/transacciones")
 @CrossOrigin("*")
 @Tag(name = "Transacciones", description = "Documentacion Transacciones")
+@Slf4j
 public class TransaccionController {
     private final TransaccionService transaccionService;
     private final ITransaccionPeticionMapper transaccionPeticionMapper;
@@ -76,14 +74,7 @@ public class TransaccionController {
 
     @Operation(
             summary = "Registrar una transacción",
-            description = "Registra una nueva transacción validando el número de tarjeta y su información asociada.",
-            requestBody = @RequestBody(
-                    description = "Información necesaria para registrar una transacción",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = TransaccionPeticionDTO.class)
-                    )
-            )
+            description = "Registra una nueva transacción validando el número de tarjeta y su información asociada."
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Transacción registrada exitosamente",
@@ -99,7 +90,8 @@ public class TransaccionController {
     })
 
     @PostMapping
-    public ResponseEntity<?> almacenar(@Valid @RequestBody TransaccionPeticionDTO transaccionPeticionDTO) {
+    public ResponseEntity<TransaccionRespuestaDTO> almacenar(@Valid @RequestBody TransaccionPeticionDTO transaccionPeticionDTO) {
+        log.info("Transaccion de entrada {}", transaccionPeticionDTO);
         if (this.validadorTarjetasService.esNumeroTarjetaValido(transaccionPeticionDTO.getNumeroTarjeta()))
             throw new OperacionInvalidaExcepcion("La tarjeta no es válida");
 
