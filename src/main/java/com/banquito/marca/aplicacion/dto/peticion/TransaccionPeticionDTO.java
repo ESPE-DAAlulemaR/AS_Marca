@@ -44,7 +44,7 @@ public class TransaccionPeticionDTO {
     private Boolean esDiferido;
 
     @NotEmpty(message = "El campo tieneInteres no debe ser vacío ni nulo")
-    private Boolean tieneInteres;
+    private Boolean tieneIntereses;
 
     @NotEmpty(message = "El número de cuotas no debe ser vacío ni nulo")
     @Positive(message = "El valor debe ser positivo")
