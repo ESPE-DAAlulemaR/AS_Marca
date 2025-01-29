@@ -103,6 +103,7 @@ public class TransaccionController {
         this.transaccionService.enviarTransaccionBanco(transaccion, transaccionPeticionDTO);
         TransaccionRespuestaDTO respuestaDTO = this.transaccionRespuestaMapper.toDto(transaccion);
 
+        log.info("Transaccion de salida {}", transaccionPeticionDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(respuestaDTO);
     }
 

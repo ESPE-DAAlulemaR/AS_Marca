@@ -116,13 +116,22 @@ public class TransaccionService {
     }
 
     public void enviarTransaccionBanco(Transaccion transaccion, TransaccionPeticionDTO transaccionPeticionDTO) {
+        transaccionPeticionDTO.setNumeroCuenta("2201456789012345");
+        ItemComisionDTO itemGtw = transaccionPeticionDTO.getDetalle().getGtw();
+        ItemComisionDTO itemProcessor = transaccionPeticionDTO.getDetalle().getProcessor();
+
+        itemGtw.setNumeroCuenta("2201234567890123");
+        itemProcessor.setNumeroCuenta("2201234567890123");
+
         ItemComisionDTO itemMarca = new ItemComisionDTO();
-        itemMarca.setReferencia("aaa");
-        itemMarca.setNumeroCuenta("00000004");
+        itemMarca.setReferencia("ccc");
+        itemMarca.setNumeroCuenta("2201987654321098");
         itemMarca.setComision(transaccion.getComision());
 
         DetalleJsonDTO detalleJsonDTO = transaccionPeticionDTO.getDetalle();
         detalleJsonDTO.setMarca(itemMarca);
+        detalleJsonDTO.setGtw(itemGtw);
+        detalleJsonDTO.setProcessor(itemProcessor);
         transaccionPeticionDTO.setDetalle(detalleJsonDTO);
 
         transaccionPeticionDTO.setTieneIntereses(false);
