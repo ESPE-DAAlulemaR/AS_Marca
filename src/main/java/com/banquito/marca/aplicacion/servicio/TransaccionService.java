@@ -125,6 +125,8 @@ public class TransaccionService {
         detalleJsonDTO.setMarca(itemMarca);
         transaccionPeticionDTO.setDetalle(detalleJsonDTO);
 
+        transaccionPeticionDTO.setTieneInteres(false);
+
         try {
             TransaccionBancoDTO res = this.cbsClient.enviarTransaccionBanco(transaccionPeticionDTO);
         } catch (FeignExcepcion excepcion) {
